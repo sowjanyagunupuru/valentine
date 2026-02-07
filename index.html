@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Be My Valentine ❤️</title>
+
   <style>
     body {
       height: 100vh;
+      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       background: linear-gradient(#ffdde1, #ee9ca7);
       font-family: Arial, sans-serif;
       text-align: center;
+      overflow: hidden;
     }
 
     .box {
@@ -20,6 +23,7 @@
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
       width: 320px;
+      z-index: 2;
     }
 
     h2 {
@@ -55,8 +59,45 @@
       color: #ff4d6d;
       font-weight: bold;
     }
+
+    /* ❤️ Falling hearts */
+    .heart {
+      position: fixed;
+      top: -20px;
+      font-size: 24px;
+      animation: fall linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    /* 💖 Love text animation */
+    .love-text {
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: 42px;
+      color: white;
+      font-weight: bold;
+      animation: pop 1.2s ease forwards;
+      z-index: 3;
+      text-shadow: 0 0 20px #ff4d6d;
+    }
+
+    @keyframes pop {
+      0% { transform: translate(-50%, -50%) scale(0); }
+      60% { transform: translate(-50%, -50%) scale(1.2); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
   </style>
 </head>
+
 <body>
 
   <div class="box">
@@ -98,13 +139,29 @@
   }
 
   function yesClicked() {
-    document.body.innerHTML = `
-      <h1 style="color:white;text-align:center;">
-        Yayyyy 💖🥰<br>
-        You just made me the happiest person!<br>
-        Happy Valentine’s Day ❤️
-      </h1>
-    `;
+    document.querySelector(".box").remove();
+
+    // 💖 Love text
+    const love = document.createElement("div");
+    love.className = "love-text";
+    love.innerHTML = "I LOVE YOUUU ❤️🥰";
+    document.body.appendChild(love);
+
+    // 💕 Falling hearts
+    setInterval(createHeart, 200);
+  }
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💖";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
   }
 </script>
 

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine ❤️</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(#ffdde1, #ee9ca7);
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      width: 320px;
+    }
+
+    h2 {
+      color: #ff4d6d;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    #no {
+      background: #ccc;
+      position: absolute;
+    }
+
+    .msg {
+      margin-top: 15px;
+      color: #ff4d6d;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>
+      Will you be my Valentine? ❤️<br><br>
+      My handsome husband 😘<br>
+      My responsible bestie 💪<br>
+      My friendly friend 🤍
+    </h2>
+
+    <div class="buttons">
+      <button id="yes" onclick="yesClicked()">YES 💕</button>
+      <button id="no" onmouseover="moveNo()">NO 🙈</button>
+    </div>
+
+    <div class="msg" id="message"></div>
+  </div>
+
+<script>
+  const messages = [
+    "Please don't click NO 😭",
+    "Think again 🥺",
+    "I’ll make you smile forever 💖",
+    "Don’t break my heart 💔",
+    "Just say YES already 😘"
+  ];
+
+  function moveNo() {
+    const noBtn = document.getElementById("no");
+    const msg = document.getElementById("message");
+
+    const x = Math.random() * 200;
+    const y = Math.random() * 80;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    msg.innerText = messages[Math.floor(Math.random() * messages.length)];
+  }
+
+  function yesClicked() {
+    document.body.innerHTML = `
+      <h1 style="color:white;text-align:center;">
+        Yayyyy 💖🥰<br>
+        You just made me the happiest person!<br>
+        Happy Valentine’s Day ❤️
+      </h1>
+    `;
+  }
+</script>
+
+</body>
+</html>
